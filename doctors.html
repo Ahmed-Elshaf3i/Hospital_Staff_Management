@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctors - Hospital</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo"
+        ><span>D</span>octors <span>C</span>ares.</a
+      >
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="doctors.html">Doctor</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-auth">Login</a>
+        <a href="signup.html" class="btn-auth signup">Sign Up</a>
+      </div>
+      <div class="fas fa-bars"></div>
+    </header>
+
+    <section class="container" style="padding-top: 120px">
+      <h1 class="heading">Doctors</h1>
+      <h3 class="title mb-5">Our professional doctors</h3>
+
+      <!-- Container for dynamic doctors -->
+      <div id="doctors-container" class="row g-4 justify-content-center"></div>
+    </section>
+
+    <section class="footer mt-5">
+      <h1 class="credit">
+        created by <span>developer</span> all rights reserved!
+      </h1>
+    </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Main Script -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Details - Hospital</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo"
+        ><span>D</span>octors <span>C</span>ares.</a
+      >
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="doctors.html">Doctor</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn-auth">Login</a>
+        <a href="signup.html" class="btn-auth signup">Sign Up</a>
+      </div>
+      <div class="fas fa-bars"></div>
+    </header>
+
+    <section class="container" style="padding-top: 120px; min-height: 80vh">
+      <h1 class="heading">Staff Details</h1>
+      <div class="row justify-content-center mt-5">
+        <div class="col-lg-10">
+          <div class="card shadow-lg border-0 overflow-hidden">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img
+                  id="staff-img"
+                  src=""
+                  class="img-fluid h-100 w-100"
+                  style="object-fit: cover; min-height: 400px"
+                  alt="Staff Image"
+                />
+              </div>
+              <div class="col-md-7 d-flex align-items-center">
+                <div class="card-body p-5">
+                  <h2
+                    id="staff-name"
+                    class="card-title text-primary mb-2 display-6 fw-bold"
+                  ></h2>
+                  <h4
+                    id="staff-role"
+                    class="card-subtitle mb-4 text-muted fs-3"
+                  ></h4>
+                  <p
+                    id="staff-desc"
+                    class="card-text fs-4 text-secondary lh-lg"
+                  >
+                    <!-- Description will be loaded here -->
+                  </p>
+                  <!-- Social links container -->
+                  <div id="social-links" class="d-flex gap-4 mt-4"></div>
+
+                  <div class="mt-5">
+                    <a
+                      href="doctors.html"
+                      class="btn btn-outline-primary fs-4 px-4 py-2 rounded-pill"
+                      >Back to Doctors</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer mt-5">
+      <h1 class="credit">
+        created by <span>developer</span> all rights reserved!
+      </h1>
+    </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Main Script -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
