@@ -1,49 +1,71 @@
-/* =========================================
-   DATABASE
-========================================= */
 CREATE DATABASE IF NOT EXISTS hospital_management;
 USE hospital_management;
 
-/* =========================================
-   DEPARTMENTS
-========================================= */
+/* =========================
+   DEPARTMENTS & ROLES
+========================= */
 CREATE TABLE departments (
     department_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT
 );
 
-/* =========================================
-   STAFF ROLES
-========================================= */
 CREATE TABLE staff_roles (
     role_id INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL
 );
 
-/* =========================================
-   STAFF
-========================================= */
+/* =========================
+   STAFF (Including Doctors)
+========================= */
 CREATE TABLE staff (
     staff_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
+    national_id VARCHAR(14) UNIQUE,
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(20),
     gender ENUM('male','female'),
     date_of_birth DATE,
     hire_date DATE,
     salary DECIMAL(10,2),
-    status ENUM('active','inactive') DEFAULT 'active',
+
     role_id INT,
     department_id INT,
+
+    specialization VARCHAR(100),
+    license_number VARCHAR(50) UNIQUE,
+
+    status ENUM('active','inactive') DEFAULT 'active',
+
     FOREIGN KEY (role_id) REFERENCES staff_roles(role_id),
     FOREIGN KEY (department_id) REFERENCES departments(department_id)
 );
 
-/* =========================================
-   STAFF SCHEDULE
-========================================= */
+/* =========================
+   PATIENTS
+========================= */
+CREATE TABLE patients (
+    patient_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    national_id VARCHAR(14) UNIQUE NOT NULL,
+    gender ENUM('male','female'),
+    date_of_birth DATE,
+    phone VARCHAR(20) NOT NULL,
+    address TEXT,
+    email VARCHAR(100),
+    blood_type ENUM('A+','A-','B+','B-','AB+','AB-','O+','O-'),
+    emergency_contact_name VARCHAR(100),
+    emergency_contact_phone VARCHAR(20),
+    insurance_provider VARCHAR(100),
+    insurance_policy_number VARCHAR(50),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+/* =========================
+   STAFF SCHEDULE & ATTENDANCE
+========================= */
 CREATE TABLE staff_schedule (
     schedule_id INT AUTO_INCREMENT PRIMARY KEY,
     staff_id INT NOT NULL,
@@ -54,9 +76,6 @@ CREATE TABLE staff_schedule (
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
 
-/* =========================================
-   STAFF ATTENDANCE
-========================================= */
 CREATE TABLE staff_attendance (
     attendance_id INT AUTO_INCREMENT PRIMARY KEY,
     staff_id INT NOT NULL,
@@ -67,141 +86,82 @@ CREATE TABLE staff_attendance (
     FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
 );
 
-/* =========================================
-   STAFF REPORTS
-========================================= */
-CREATE TABLE staff_reports (
-    report_id INT AUTO_INCREMENT PRIMARY KEY,
-    staff_id INT NOT NULL,
-    report_title VARCHAR(100),
-    report_text TEXT,
-    report_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (staff_id) REFERENCES staff(staff_id)
-);
-
-/* =========================================
-   PATIENTS
-========================================= */
-CREATE TABLE patients (
-    patient_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    gender ENUM('male','female'),
-    date_of_birth DATE,
-    phone VARCHAR(20),
-    address TEXT,
-    email VARCHAR(100),
-    blood_type ENUM('A','B','AB','O'),
-    emergency_contact VARCHAR(100)
-);
-
-/* =========================================
-   DOCTORS
-========================================= */
-CREATE TABLE doctors (
-    doctor_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    specialization VARCHAR(100),
-    phone VARCHAR(20),
-    email VARCHAR(100) UNIQUE
-);
-
-/* =========================================
-   APPOINTMENTS
-========================================= */
+/* =========================
+   APPOINTMENTS & RECORDS
+========================= */
 CREATE TABLE appointments (
     appointment_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
     doctor_id INT NOT NULL,
     appointment_date DATE NOT NULL,
     appointment_time TIME NOT NULL,
-    status ENUM('pending','confirmed','completed','cancelled') DEFAULT 'pending',
+    reason_for_visit VARCHAR(255),
+    status ENUM('pending','confirmed','completed','cancelled','no_show') DEFAULT 'pending',
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
-    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+    FOREIGN KEY (doctor_id) REFERENCES staff(staff_id)
 );
 
-/* =========================================
-   MEDICAL RECORDS
-========================================= */
 CREATE TABLE medical_records (
     record_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
     doctor_id INT NOT NULL,
     diagnosis TEXT,
-    treatment TEXT,
-    record_date DATE NOT NULL,
+    treatment_plan TEXT,
+    prescription TEXT,
+    record_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
-    FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+    FOREIGN KEY (doctor_id) REFERENCES staff(staff_id)
 );
 
-/* =========================================
-   ROOMS
-========================================= */
+/* =========================
+   ROOMS & ADMISSIONS
+========================= */
 CREATE TABLE rooms (
     room_id INT AUTO_INCREMENT PRIMARY KEY,
     room_number VARCHAR(10) UNIQUE NOT NULL,
-    room_type ENUM('ICU','General','Private'),
-    status ENUM('available','occupied') DEFAULT 'available'
+    room_type ENUM('ICU','General','Private','Ward'),
+    price_per_night DECIMAL(10,2) NOT NULL,
+    status ENUM('available','occupied','maintenance') DEFAULT 'available'
 );
 
-/* =========================================
-   ADMISSIONS
-========================================= */
 CREATE TABLE admissions (
     admission_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
     room_id INT NOT NULL,
-    admission_date DATE NOT NULL,
-    discharge_date DATE,
+    admission_date DATETIME NOT NULL,
+    discharge_date DATETIME,
+    discharge_summary TEXT,
     FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
     FOREIGN KEY (room_id) REFERENCES rooms(room_id)
 );
 
-/* =========================================
-   BILLING
-========================================= */
-CREATE TABLE billing (
-    bill_id INT AUTO_INCREMENT PRIMARY KEY,
-    patient_id INT NOT NULL,
-    total_amount DECIMAL(10,2) NOT NULL,
-    payment_status ENUM('paid','unpaid') DEFAULT 'unpaid',
-    bill_date DATE NOT NULL,
-    FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
-);
-
-/* =========================================
-   INVOICES
-========================================= */
+/* =========================
+   INVOICES & PAYMENTS
+========================= */
 CREATE TABLE invoices (
     invoice_id INT AUTO_INCREMENT PRIMARY KEY,
     patient_id INT NOT NULL,
-    invoice_date DATE,
-    total_amount DECIMAL(10,2),
-    status VARCHAR(50),
-    FOREIGN KEY (patient_id) REFERENCES patients(patient_id)
+    admission_id INT,
+    appointment_id INT,
+    invoice_date DATE DEFAULT CURRENT_DATE,
+    total_amount DECIMAL(10,2) NOT NULL,
+    tax_amount DECIMAL(10,2) DEFAULT 0.00,
+    discount_amount DECIMAL(10,2) DEFAULT 0.00,
+    net_amount DECIMAL(10,2) GENERATED ALWAYS AS 
+        (total_amount + tax_amount - discount_amount) STORED,
+    status ENUM('unpaid','partially_paid','paid','cancelled') DEFAULT 'unpaid',
+
+    FOREIGN KEY (patient_id) REFERENCES patients(patient_id),
+    FOREIGN KEY (admission_id) REFERENCES admissions(admission_id),
+    FOREIGN KEY (appointment_id) REFERENCES appointments(appointment_id)
 );
 
-/* =========================================
-   PAYMENT HISTORY
-========================================= */
-CREATE TABLE payment_history (
+CREATE TABLE payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     invoice_id INT NOT NULL,
-    payment_date DATE,
-    payment_method VARCHAR(50),
-    amount_paid DECIMAL(10,2),
-    FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id)
-);
-
-/* =========================================
-   FINANCIAL REPORTS
-========================================= */
-CREATE TABLE reports (
-    report_id INT AUTO_INCREMENT PRIMARY KEY,
-    invoice_id INT NOT NULL,
-    report_date DATE,
-    paid_amount DECIMAL(10,2),
-    remaining_amount DECIMAL(10,2),
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    amount_paid DECIMAL(10,2) NOT NULL,
+    payment_method ENUM('cash','credit_card','insurance','bank_transfer'),
+    transaction_reference VARCHAR(100),
     FOREIGN KEY (invoice_id) REFERENCES invoices(invoice_id)
 );
