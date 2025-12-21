@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard - Doctors Cares Hospital</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 2px 0;
+        }
+
+        .sidebar .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(243, 156, 18, 0.3);
+        }
+
+        .main-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .attendance-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            position: relative;
+        }
+
+        .attendance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 15px;
+        }
+
+        .attendance-card .card-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn {
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 8px 15px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        .list-group-item {
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+        }
+
+        /* Animation for content switching */
+        .main-content>.container-fluid>.row {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #229954 0%, #27ae60 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0 sidebar">
+                <div class="p-4">
+                    <h4 class="mb-4"><i class="fas fa-user-md me-2"></i>Doctor</h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active mb-2" href="#dashboard"><i
+                                class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a class="nav-link mb-2" href="#appointments"><i
+                                class="fas fa-calendar-check me-2"></i>Appointments</a>
+                        <a class="nav-link mb-2" href="#patients"><i class="fas fa-users me-2"></i>My Patients</a>
+                        <a class="nav-link mb-2" href="#schedule"><i class="fas fa-clock me-2"></i>Schedule</a>
+                        <a class="nav-link mb-2" href="#attendance"><i
+                                class="fas fa-check-circle me-2"></i>Attendance</a>
+                        <hr class="my-3">
+                        <a class="nav-link" href="index.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-0 main-content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+                    <span class="navbar-brand mb-0 h1">Welcome, Dr. John Doe</span>
+                    <div class="ms-auto">
+                        <span class="badge bg-info">Cardiologist</span>
+                    </div>
+                </nav>
+
+                <div class="container-fluid p-4">
+                    <!-- Dashboard Overview -->
+                    <div id="dashboard" class="row mb-4">
+                        <div class="col-12">
+                            <h2 class="mb-4">Today's Overview</h2>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-calendar-check fa-3x text-primary mb-3"></i>
+                                    <h3>8</h3>
+                                    <p class="mb-0">Today's Appointments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-users fa-3x text-success mb-3"></i>
+                                    <h3>45</h3>
+                                    <p class="mb-0">Total Patients</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card attendance-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-clock fa-3x mb-3"></i>
+                                    <h5>Attendance Status</h5>
+                                    <p class="mb-2">Present</p>
+                                    <small>Checked in at 8:30 AM</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointments -->
+                    <div id="appointments" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Today's Appointments</h2>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span></span>
+                                <button class="btn btn-info"
+                                    onclick="window.open('appointment-calendar.html', '_blank')">View Calendar</button>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Patient</th>
+                                                    <th>Reason</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>9:00 AM</td>
+                                                    <td>Ahmed Hassan</td>
+                                                    <td>Follow-up</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">View
+                                                            Details</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10:00 AM</td>
+                                                    <td>Fatma Ali</td>
+                                                    <td>Consultation</td>
+                                                    <td><span class="badge bg-warning">In Progress</span></td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">View
+                                                            Details</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11:00 AM</td>
+                                                    <td>Mohamed Salah</td>
+                                                    <td>Check-up</td>
+                                                    <td><span class="badge bg-secondary">Waiting</span></td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">View
+                                                            Details</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Patients -->
+                    <div id="patients" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">My Patients</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Last Visit</th>
+                                                    <th>Condition</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>P001</td>
+                                                    <td>Ahmed Hassan</td>
+                                                    <td>Dec 20, 2025</td>
+                                                    <td>Hypertension</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary me-1">View
+                                                            History</button>
+                                                        <button class="btn btn-sm btn-outline-success">Add
+                                                            Notes</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>P002</td>
+                                                    <td>Fatma Ali</td>
+                                                    <td>Dec 18, 2025</td>
+                                                    <td>Diabetes</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary me-1">View
+                                                            History</button>
+                                                        <button class="btn btn-sm btn-outline-success">Add
+                                                            Notes</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule -->
+                    <div id="schedule" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">My Schedule</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Weekly Schedule</h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Monday - Friday</h6>
+                                            <p>9:00 AM - 5:00 PM</p>
+                                            <p>Lunch: 1:00 PM - 2:00 PM</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Saturday</h6>
+                                            <p>9:00 AM - 1:00 PM</p>
+                                            <p>Sunday: Off</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5>Today's Schedule</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">9:00 AM - Ahmed Hassan (Follow-up)</li>
+                                        <li class="list-group-item">10:00 AM - Fatma Ali (Consultation)</li>
+                                        <li class="list-group-item">11:00 AM - Mohamed Salah (Check-up)</li>
+                                        <li class="list-group-item">2:00 PM - Sara Ahmed (Follow-up)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance -->
+                    <div id="attendance" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Attendance Management</h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card attendance-card">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-sign-in-alt fa-3x mb-3"></i>
+                                            <h5>Check In</h5>
+                                            <p>Mark your arrival</p>
+                                            <button class="btn btn-light">Check In Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-sign-out-alt fa-3x text-danger mb-3"></i>
+                                            <h5>Check Out</h5>
+                                            <p>Mark your departure</p>
+                                            <button class="btn btn-outline-danger">Check Out</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Attendance History</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Check In</th>
+                                                    <th>Check Out</th>
+                                                    <th>Hours Worked</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dec 20, 2025</td>
+                                                    <td>8:30 AM</td>
+                                                    <td>5:30 PM</td>
+                                                    <td>9 hours</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Dec 19, 2025</td>
+                                                    <td>8:45 AM</td>
+                                                    <td>5:15 PM</td>
+                                                    <td>8.5 hours</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+
+                // Hide all sections
+                document.querySelectorAll('.main-content > .container-fluid > .row').forEach(row => {
+                    row.style.display = 'none';
+                });
+
+                // Show target section
+                document.getElementById(target).style.display = 'block';
+
+                // Update active link
+                document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

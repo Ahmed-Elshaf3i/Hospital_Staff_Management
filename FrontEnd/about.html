@@ -1,196 +1,322 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Hospital</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      a {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <a href="index.html" class="logo"
-        ><span>D</span>octors <span>C</span>ares.</a
-      >
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="doctors.html">Doctor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="auth-buttons">
-        <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
-        <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Doctors Cares Hospital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Cairo', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero-section p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-image {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .service-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.05) 100%);
+    }
+
+    .service-content {
+      padding: 30px;
+    }
+
+    .service-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .service-description {
+      color: #6c757d;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .features-section {
+      background: white;
+      padding: 80px 0;
+      margin: 50px 0;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 40px 30px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+      font-size: 4rem;
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+
+    .feature-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .feature-description {
+      color: #6c757d;
+      line-height: 1.6;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .mission-section {
+      background: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .mission-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .mission-text {
+      font-size: 1.2rem;
+      color: #6c757d;
+      line-height: 1.8;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Doctor</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="admin-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Admin</a>
+      <a href="doctor-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Doctor</a>
+      <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
+      <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+    </div>
+    <div class="fas fa-bars" id="menu-btn"></div>
+  </header>
+
+  <section class="hero-section">
+    <div class="container">
+      <h1>About Doctors Cares Hospital</h1>
+      <p>We provide exceptional healthcare that combines advanced medical expertise with human compassion, committed to
+        the highest standards of quality and safety.</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 80px 0;">
+    <div class="row mb-5">
+      <div class="col-12 text-center mb-5">
+        <h2 class="mission-title">Our Story</h2>
+        <p class="mission-text">
+          Doctors Cares Hospital was established in 2020 with the goal of providing outstanding health services that
+          merge modern medical technology with human care.
+          We are proud of our qualified and experienced medical team, which includes more than 16 specialized doctors
+          across various medical fields.
+        </p>
       </div>
-      <div class="fas fa-bars"></div>
-    </header>
+    </div>
 
-    <section class="container" style="padding-top: 12rem">
-      <h1 class="heading">About our Facility</h1>
-      <h1 class="title mb-5">Learn and explore our facility</h1>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="service-card">
+          <div class="service-image"
+            style="background-image: url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">24/7 Ambulance Services</h3>
+            <p class="service-description">
+              We provide integrated ambulance services 24 hours a day, 7 days a week. Our ambulances are equipped with
+              the latest medical equipment and life-support devices.
+            </p>
+          </div>
+        </div>
+      </div>
 
+      <div class="col-lg-6">
+        <div class="service-card">
+          <div class="service-image"
+            style="background-image: url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+          </div>
+          <div class="service-content">
+            <h3 class="service-title">Advanced Emergency Rooms</h3>
+            <p class="service-description">
+              Our emergency rooms are equipped with the latest medical technology to handle all emergency cases. A
+              specialized team works around the clock to provide immediate care.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <div class="container">
+      <div class="row text-center mb-5">
+        <div class="col-12">
+          <h2 class="mission-title">Why Choose Doctors Cares Hospital?</h2>
+        </div>
+      </div>
       <div class="row g-4">
-        <!-- Box 1 -->
-        <div class="col-lg-12">
-          <div class="card border-0 shadow-lg overflow-hidden rounded-3">
-            <div class="row g-0 align-items-center">
-              <div class="col-md-6">
-                <img
-                  src="https://raw.githubusercontent.com/farazc60/Project-Images/main/hospital/assets/about-1.png"
-                  class="img-fluid w-100 h-100 object-fit-cover"
-                  style="min-height: 30rem"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-6 p-5">
-                <div class="card-body">
-                  <h3 class="card-title text-primary display-6 fw-bold mb-3">
-                    Ambulance Services
-                  </h3>
-                  <p class="card-text fs-3 text-secondary lh-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi consequuntur. We provide 24/7 ambulance services with
-                    state-of-the-art equipment.
-                  </p>
-                  <a
-                    href="#"
-                    class="btn btn-primary fs-4 px-5 py-2 rounded-pill mt-4"
-                    >Learn more</a
-                  >
-                </div>
-              </div>
-            </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-card bg-light">
+            <i class="fas fa-user-md feature-icon"></i>
+            <h4 class="feature-title">Specialized Doctors</h4>
+            <p class="feature-description">A team of the most skilled, qualified, and experienced doctors.</p>
           </div>
         </div>
-
-        <!-- Box 2 (Reversed) -->
-        <div class="col-lg-12">
-          <div class="card border-0 shadow-lg overflow-hidden rounded-3">
-            <div class="row g-0 align-items-center flex-md-row-reverse">
-              <div class="col-md-6">
-                <img
-                  src="https://raw.githubusercontent.com/farazc60/Project-Images/main/hospital/assets/about-2.png"
-                  class="img-fluid w-100 h-100 object-fit-cover"
-                  style="min-height: 30rem"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-6 p-5">
-                <div class="card-body">
-                  <h3 class="card-title text-primary display-6 fw-bold mb-3">
-                    Emergency Rooms
-                  </h3>
-                  <p class="card-text fs-3 text-secondary lh-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi consequuntur. Our emergency rooms are equipped to
-                    handle any critical situation.
-                  </p>
-                  <a
-                    href="#"
-                    class="btn btn-primary fs-4 px-5 py-2 rounded-pill mt-4"
-                    >Learn more</a
-                  >
-                </div>
-              </div>
-            </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-card bg-light">
+            <i class="fas fa-ambulance feature-icon"></i>
+            <h4 class="feature-title">24/7 Emergency Care</h4>
+            <p class="feature-description">Emergency and ambulance services available around the clock.</p>
           </div>
         </div>
-
-        <!-- Box 3 -->
-        <div class="col-lg-12">
-          <div class="card border-0 shadow-lg overflow-hidden rounded-3">
-            <div class="row g-0 align-items-center">
-              <div class="col-md-6">
-                <img
-                  src="https://raw.githubusercontent.com/farazc60/Project-Images/main/hospital/assets/about-3.png"
-                  class="img-fluid w-100 h-100 object-fit-cover"
-                  style="min-height: 30rem"
-                  alt="..."
-                />
-              </div>
-              <div class="col-md-6 p-5">
-                <div class="card-body">
-                  <h3 class="card-title text-primary display-6 fw-bold mb-3">
-                    Free Check-ups
-                  </h3>
-                  <p class="card-text fs-3 text-secondary lh-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nisi consequuntur. We offer free regular check-ups for
-                    senior citizens and children.
-                  </p>
-                  <a
-                    href="#"
-                    class="btn btn-primary fs-4 px-5 py-2 rounded-pill mt-4"
-                    >Learn more</a
-                  >
-                </div>
-              </div>
-            </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-card bg-light">
+            <i class="fas fa-microscope feature-icon"></i>
+            <h4 class="feature-title">Advanced Technology</h4>
+            <p class="feature-description">The latest medical devices to ensure the best results.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="feature-card bg-light">
+            <i class="fas fa-heart feature-icon"></i>
+            <h4 class="feature-title">Compassionate Care</h4>
+            <p class="feature-description">A patient-centered approach with focus on well-being.</p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- New Section: Why Choose Us -->
-      <div class="row mt-5 pt-5 text-center">
-        <h1 class="heading">Why Choose Us?</h1>
-        <div class="col-md-4 mt-4">
-          <div class="p-5 shadow-sm rounded bg-white h-100">
-            <i
-              class="fas fa-user-md fs-1 text-primary mb-3"
-              style="font-size: 5rem"
-            ></i>
-            <h3 class="fs-2 fw-bold my-3">Qualified Doctors</h3>
-            <p class="fs-4 text-muted">
-              Our team consists of highly qualified and experienced medical
-              professionals.
-            </p>
-          </div>
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-number">16+</div>
+          <div class="stat-label">Specialized Doctors</div>
         </div>
-        <div class="col-md-4 mt-4">
-          <div class="p-5 shadow-sm rounded bg-white h-100">
-            <i
-              class="fas fa-ambulance fs-1 text-primary mb-3"
-              style="font-size: 5rem"
-            ></i>
-            <h3 class="fs-2 fw-bold my-3">Emergency Care</h3>
-            <p class="fs-4 text-muted">
-              We provide 24/7 emergency care with rapid response ambulance
-              services.
-            </p>
-          </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-number">1250+</div>
+          <div class="stat-label">Annual Patients</div>
         </div>
-        <div class="col-md-4 mt-4">
-          <div class="p-5 shadow-sm rounded bg-white h-100">
-            <i
-              class="fas fa-procedures fs-1 text-primary mb-3"
-              style="font-size: 5rem"
-            ></i>
-            <h3 class="fs-2 fw-bold my-3">Modern Facilities</h3>
-            <p class="fs-4 text-muted">
-              Equipped with the latest medical technology to ensure the best
-              treatment.
-            </p>
-          </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Continuous Service</div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Years of Experience</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="footer mt-5">
-      <h1 class="credit">
-        created by <span>developer</span> all rights reserved!
-      </h1>
-    </section>
-    <script src="js/bootstrap.bundle.min.js"></script>
-  </body>
+  <footer class="bg-dark text-light py-5">
+    <div class="container text-center">
+      <p class="mb-0">&copy; 2025 Doctors Cares Hospital. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>

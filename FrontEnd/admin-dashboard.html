@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Doctors Cares Hospital</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 2px 0;
+        }
+
+        .sidebar .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .main-content {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: white !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: 15px;
+        }
+
+        .stats-card .card-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-card i {
+            opacity: 0.9;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn {
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge {
+            border-radius: 20px;
+            padding: 8px 15px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        /* Animation for content switching */
+        .main-content>.container-fluid>.row {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0 sidebar">
+                <div class="p-4">
+                    <h4 class="mb-4"><i class="fas fa-cog me-2"></i>Admin</h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active mb-2" href="#dashboard"><i
+                                class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a class="nav-link mb-2" href="#patients"><i class="fas fa-users me-2"></i>Patient List</a>
+                        <a class="nav-link mb-2" href="#staff"><i class="fas fa-user-md me-2"></i>Staff Management</a>
+                        <a class="nav-link mb-2" href="#appointments"><i
+                                class="fas fa-calendar-check me-2"></i>Appointments</a>
+                        <a class="nav-link mb-2" href="#payments"><i class="fas fa-credit-card me-2"></i>Payments</a>
+                        <a class="nav-link mb-2" href="#reports"><i class="fas fa-chart-bar me-2"></i>Reports</a>
+                        <hr class="my-3">
+                        <a class="nav-link" href="index.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-0 main-content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+                    <span class="navbar-brand mb-0 h1">Admin Dashboard</span>
+                    <div class="ms-auto">
+                        <span class="badge bg-danger">Admin</span>
+                    </div>
+                </nav>
+
+                <div class="container-fluid p-4">
+                    <!-- Dashboard Overview -->
+                    <div id="dashboard" class="row mb-4">
+                        <div class="col-12">
+                            <h2 class="mb-4">Hospital Overview</h2>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-users fa-3x mb-3"></i>
+                                    <h3>1,250</h3>
+                                    <p class="mb-0">Total Patients</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-user-md fa-3x mb-3"></i>
+                                    <h3>45</h3>
+                                    <p class="mb-0">Active Doctors</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-calendar-check fa-3x mb-3"></i>
+                                    <h3>320</h3>
+                                    <p class="mb-0">Today's Appointments</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card stats-card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-dollar-sign fa-3x mb-3"></i>
+                                    <h3>$25,400</h3>
+                                    <p class="mb-0">Monthly Revenue</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Patient List -->
+                    <div id="patients" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Patient Management</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <h5>Patient List</h5>
+                                        <button class="btn btn-primary">Add New Patient</button>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Last Visit</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>P001</td>
+                                                    <td>Ahmed Hassan</td>
+                                                    <td>ahmed@email.com</td>
+                                                    <td>+1234567890</td>
+                                                    <td>Dec 20, 2025</td>
+                                                    <td><span class="badge bg-success">Active</span></td>
+                                                    <td>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-primary me-1">View</button>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-warning me-1">Edit</button>
+                                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>P002</td>
+                                                    <td>Fatma Ali</td>
+                                                    <td>fatma@email.com</td>
+                                                    <td>+1234567891</td>
+                                                    <td>Dec 18, 2025</td>
+                                                    <td><span class="badge bg-warning">Pending</span></td>
+                                                    <td>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-primary me-1">View</button>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-warning me-1">Edit</button>
+                                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Staff Management -->
+                    <div id="staff" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Staff Management</h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Staff List</h5>
+                                            <p class="card-text">View and manage all hospital staff members.</p>
+                                            <button class="btn btn-primary">View Staff</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Add New Staff</h5>
+                                            <p class="card-text">Register new doctors, nurses, and administrative staff.
+                                            </p>
+                                            <button class="btn btn-success">Add Staff</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Schedule Management</h5>
+                                    <p>Manage staff schedules and shifts.</p>
+                                    <button class="btn btn-info">Manage Schedules</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointments -->
+                    <div id="appointments" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Appointment Scheduling</h2>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Appointment Book</h5>
+                                            <p class="card-text">View all scheduled appointments.</p>
+                                            <button class="btn btn-primary">View Appointments</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Appointment Calendar</h5>
+                                            <p class="card-text">Calendar view of all appointments.</p>
+                                            <button class="btn btn-info"
+                                                onclick="window.open('appointment-calendar.html', '_blank')">Open
+                                                Calendar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Doctor Availability</h5>
+                                            <p class="card-text">Check doctor availability and schedules.</p>
+                                            <button class="btn btn-warning">Check Availability</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Patient Check-in</h5>
+                                            <p class="card-text">Manage patient arrivals and check-ins.</p>
+                                            <button class="btn btn-success">Check-in Patients</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payments -->
+                    <div id="payments" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Payment Management</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Invoice History</h5>
+                                    <p>View all payment invoices and transaction history.</p>
+                                    <button class="btn btn-primary">View Invoices</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reports -->
+                    <div id="reports" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Reports & Analytics</h2>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                                            <h5>Financial Reports</h5>
+                                            <button class="btn btn-outline-primary">Generate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-users fa-3x text-success mb-3"></i>
+                                            <h5>Patient Reports</h5>
+                                            <button class="btn btn-outline-success">Generate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <i class="fas fa-calendar-alt fa-3x text-warning mb-3"></i>
+                                            <h5>Appointment Reports</h5>
+                                            <button class="btn btn-outline-warning">Generate</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+
+                // Hide all sections
+                document.querySelectorAll('.main-content > .container-fluid > .row').forEach(row => {
+                    row.style.display = 'none';
+                });
+
+                // Show target section
+                document.getElementById(target).style.display = 'block';
+
+                // Update active link
+                document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

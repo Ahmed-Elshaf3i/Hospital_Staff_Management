@@ -1,72 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hospital Website</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      a {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <a href="index.html" class="logo"
-        ><span>D</span>octors <span>C</span>ares.</a
-      >
 
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="doctors.html">Doctor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctors Cares Hospital</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    a {
+      text-decoration: none;
+    }
 
-      <!-- Login / Signup -->
-      <div class="auth-buttons">
-        <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
-        <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+    .card:hover {
+      transform: translateY(-10px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Doctor</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Login / Signup -->
+    <div class="auth-buttons">
+      <a href="admin-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Admin</a>
+      <a href="doctor-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Doctor</a>
+      <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
+      <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+    </div>
+
+    <div class="fas fa-bars" id="menu-btn"></div>
+  </header>
+
+  <section id="home" class="home container-fluid">
+    <div class="row min-vh-100 align-items-center">
+      <div class="col-md-6 text-center order-md-2">
+        <img src="https://raw.githubusercontent.com/farazc60/Project-Images/main/hospital/assets/home.png" alt=""
+          class="img-fluid" />
+      </div>
+      <div class="col-md-6 content text-center text-md-start order-md-1 ps-md-5">
+        <h1><span>Stay</span> Safe, <span>Stay</span> Healthy.</h1>
+        <p>
+          Welcome to Doctors Cares, your trusted healthcare partner. We provide exceptional medical services with a team
+          of experienced professionals dedicated to your well-being.
+        </p>
+        <a href="#about-hospital"><button class="button">Read More</button></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-hospital" class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+    <div class="container">
+      <h2 class="text-center mb-5 display-4 fw-bold" style="color: #1e3a8a; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+        About Doctors Cares Hospital</h2>
+      <p class="text-center fs-4 mb-5" style="color: #495057; max-width: 800px; margin: 0 auto;">
+        Doctors Cares is a <span class="fw-bold text-success">private hospital</span> that provides exceptional medical
+        services with a focus on patient care and safety.
+      </p>
+
+      <div class="row g-4">
+        <!-- Comprehensive Health Insurance -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #007bff;">Comprehensive Health Insurance</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">We offer extensive coverage for all medical services,
+                ensuring peace of mind for our patients.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Care for Patients -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1551190822-a9333d879b1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #dc3545;">Care for Patients</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">Our dedicated team provides personalized care, treating
+                each patient with compassion and expertise.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Treatment at the Highest Level -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-star fa-3x text-warning mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #ffc107;">Treatment at the Highest Level</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">Utilizing cutting-edge technologies and equipment for
+                top-quality, advanced medical treatment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking via Online App -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-mobile-alt fa-3x text-info mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #17a2b8;">Booking via Online App</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">Easily schedule appointments through our user-friendly
+                online application, available 24/7.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24/7 Service -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #6f42c1;">24/7 Service</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">Round-the-clock availability to provide immediate
+                medical care whenever you need it.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Commitment -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-lg border-0 rounded-3 overflow-hidden" style="transition: transform 0.3s ease;">
+            <div class="card-img-top"
+              style="height: 200px; background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover;">
+            </div>
+            <div class="card-body text-center p-4">
+              <i class="fas fa-handshake fa-3x text-success mb-3"></i>
+              <h5 class="card-title fw-bold fs-3" style="color: #28a745;">Our Commitment</h5>
+              <p class="card-text fs-5" style="color: #6c757d;">We are committed to delivering the best medical services
+                to ensure your health and safety.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container py-5 bg-light">
+    <h1 class="heading text-center">What Our Patients Say</h1>
+    <h3 class="title text-center mb-5">Testimonials</h3>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-lg border-0 rounded-3">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+            <p class="card-text fs-5 mb-3">"The care I received was exceptional. The doctors are highly skilled and the
+              staff is very friendly."</p>
+            <h5 class="card-title fw-bold">Ahmed Hassan</h5>
+            <small class="text-muted">Patient</small>
+          </div>
+        </div>
       </div>
 
-      <div class="fas fa-bars"></div>
-    </header>
-
-    <section id="home" class="home container-fluid">
-      <div class="row min-vh-100 align-items-center">
-        <div class="col-md-6 text-center order-md-2">
-          <img
-            src="https://raw.githubusercontent.com/farazc60/Project-Images/main/hospital/assets/home.png"
-            alt=""
-            class="img-fluid"
-          />
-        </div>
-        <div
-          class="col-md-6 content text-center text-md-start order-md-1 ps-md-5"
-        >
-          <h1><span>Stay</span> Safe, <span>Stay</span> Healthy.</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit,
-            accusantium!
-          </p>
-          <a href="#"><button class="button">Read More</button></a>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-lg border-0 rounded-3">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+            <p class="card-text fs-5 mb-3">"I am grateful for the quick response and professional treatment. Highly
+              recommend this hospital."</p>
+            <h5 class="card-title fw-bold">Fatima Ali</h5>
+            <small class="text-muted">Patient</small>
+          </div>
         </div>
       </div>
-    </section>
 
-    <section class="footer">
-      <h1 class="credit">
-        created by <span>developer</span> all rights reserved!
-      </h1>
-    </section>
-    <script src="js/bootstrap.bundle.min.js"></script>
-  </body>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-lg border-0 rounded-3">
+          <div class="card-body text-center p-4">
+            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+            <p class="card-text fs-5 mb-3">"The facilities are top-notch and the medical team is dedicated to patient
+              well-being."</p>
+            <h5 class="card-title fw-bold">Omar Khalid</h5>
+            <small class="text-muted">Patient</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-dark text-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Doctors Cares Hospital</h5>
+          <p>Providing exceptional healthcare services with compassion and expertise since 2020.</p>
+          <div class="d-flex">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+            <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+            <li><a href="doctors.html" class="text-light text-decoration-none">Doctors</a></li>
+            <li><a href="appointment.html" class="text-light text-decoration-none">Appointment</a></li>
+            <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Contact Info</h5>
+          <p><i class="fas fa-map-marker-alt me-2"></i>123 Health Street, Medical City, MC 12345</p>
+          <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+          <p><i class="fas fa-envelope me-2"></i>info@doctorscareshospital.com</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 Doctors Cares Hospital. All rights reserved. Created by <span
+            class="fw-bold">Developer</span></p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>

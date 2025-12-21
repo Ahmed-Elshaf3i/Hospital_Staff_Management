@@ -1,58 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctors - Hospital</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-      a {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <a href="index.html" class="logo"
-        ><span>D</span>octors <span>C</span>ares.</a
-      >
-      <nav class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="doctors.html">Doctor</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="auth-buttons">
-        <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
-        <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctors - Hospital</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    a {
+      text-decoration: none;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    .doctor-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .doctor-img {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .doctor-img::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+    }
+
+    .doctor-info {
+      padding: 25px;
+    }
+
+    .doctor-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .doctor-role {
+      color: #007bff;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .doctor-description {
+      color: #6c757d;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      color: #6c757d;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #007bff;
+    }
+
+    .filter-buttons {
+      margin-bottom: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      background: white;
+      border: 2px solid #007bff;
+      color: #007bff;
+      padding: 8px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .heading {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      text-align: center;
+      color: #6c757d;
+      font-size: 1.2rem;
+      margin-bottom: 50px;
+    }
+
+    /* Doctor Profile Modal Styles */
+    .profile-header {
+      position: relative;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 0 0 20px 20px;
+    }
+
+    .profile-avatar {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 5px solid white;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .profile-info {
+      padding: 80px 30px 30px;
+      text-align: center;
+      background: #f8f9fa;
+    }
+
+    .profile-name {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    .profile-role {
+      font-size: 1.1rem;
+      color: #007bff;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .profile-description {
+      color: #6c757d;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .profile-details {
+      padding: 30px;
+      background: white;
+    }
+
+    .detail-section {
+      margin-bottom: 25px;
+    }
+
+    .detail-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .detail-title i {
+      margin-right: 10px;
+      color: #007bff;
+    }
+
+    .detail-content {
+      color: #6c757d;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .social-links-profile {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .social-links-profile a {
+      color: #6c757d;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      padding: 10px;
+      border-radius: 50%;
+      background: #f8f9fa;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-links-profile a:hover {
+      color: #007bff;
+      background: #e9ecef;
+      transform: translateY(-3px);
+    }
+
+    .badge-profile {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin: 5px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="doctors.html">Doctor</a></li>
+        <li><a href="appointment.html">Appointment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <a href="admin-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Admin</a>
+      <a href="doctor-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Doctor</a>
+      <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
+      <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+    </div>
+    <div class="fas fa-bars" id="menu-btn"></div>
+  </header>
+
+  <section class="container" style="padding-top: 120px">
+    <h1 class="heading">Our Doctors</h1>
+    <h3 class="title">Meet our professional medical team</h3>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All Doctors</button>
+      <button class="filter-btn" data-filter="Cardiologist">Cardiology</button>
+      <button class="filter-btn" data-filter="Pediatrician">Pediatrics</button>
+      <button class="filter-btn" data-filter="Neurologist">Neurology</button>
+      <button class="filter-btn" data-filter="Ophthalmologist">Ophthalmology</button>
+      <button class="filter-btn" data-filter="Dentist">Dentistry</button>
+      <button class="filter-btn" data-filter="Psychiatrist">Psychiatry</button>
+      <button class="filter-btn" data-filter="Orthopedic Surgeon">Orthopedics</button>
+      <button class="filter-btn" data-filter="Dermatologist">Dermatology</button>
+      <button class="filter-btn" data-filter="ENT Specialist">ENT</button>
+      <button class="filter-btn" data-filter="Gynecologist">Gynecology</button>
+      <button class="filter-btn" data-filter="Urologist">Urology</button>
+      <button class="filter-btn" data-filter="Gastroenterologist">Gastroenterology</button>
+      <button class="filter-btn" data-filter="Oncologist">Oncology</button>
+      <button class="filter-btn" data-filter="Radiologist">Radiology</button>
+      <button class="filter-btn" data-filter="Emergency Medicine Physician">Emergency</button>
+      <button class="filter-btn" data-filter="Family Medicine Physician">Family Medicine</button>
+    </div>
+
+    <!-- Container for dynamic doctors -->
+    <div id="doctors-container" class="row g-4 justify-content-center"></div>
+  </section>
+
+  <!-- Doctor Profile Modal -->
+  <div class="modal fade" id="doctorProfileModal" tabindex="-1" aria-labelledby="doctorProfileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="border: none; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
+        <div class="modal-header"
+          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 20px 20px 0 0;">
+          <h5 class="modal-title" id="doctorProfileModalLabel">Doctor Profile</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div id="doctorProfileContent">
+            <!-- Content will be dynamically loaded here -->
+          </div>
+        </div>
       </div>
-      <div class="fas fa-bars"></div>
-    </header>
+    </div>
+  </div>
 
-    <section class="container" style="padding-top: 120px">
-      <h1 class="heading">Doctors</h1>
-      <h3 class="title mb-5">Our professional doctors</h3>
+  <footer class="bg-dark text-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Doctors Cares Hospital</h5>
+          <p>Providing exceptional healthcare services with compassion and expertise since 2020.</p>
+          <div class="d-flex">
+            <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+            <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+            <li><a href="doctors.html" class="text-light text-decoration-none">Doctors</a></li>
+            <li><a href="appointment.html" class="text-light text-decoration-none">Appointment</a></li>
+            <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold">Contact Info</h5>
+          <p><i class="fas fa-map-marker-alt me-2"></i>123 Health Street, Medical City, MC 12345</p>
+          <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+          <p><i class="fas fa-envelope me-2"></i>info@doctorscareshospital.com</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 Doctors Cares Hospital. All rights reserved. Created by <span
+            class="fw-bold">Developer</span></p>
+      </div>
+    </div>
+  </footer>
 
-      <!-- Container for dynamic doctors -->
-      <div id="doctors-container" class="row g-4 justify-content-center"></div>
-    </section>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Include the data file -->
+  <script src="doctors.js"></script>
+  <!-- Main Script -->
+  <script src="js/script.js"></script>
 
-    <section class="footer mt-5">
-      <h1 class="credit">
-        created by <span>developer</span> all rights reserved!
-      </h1>
-    </section>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- Include the data file -->
-    <script src="doctors.js"></script>
-    <!-- Main Script -->
-    <script src="js/script.js"></script>
-  </body>
+  <script>
+    // Function to create doctor card
+    function createDoctorCard(doctor) {
+      return `
+        <div class="col-lg-4 col-md-6 doctor-card" data-role="${doctor.role}">
+          <div class="doctor-img" style="background-image: url('${doctor.img}')">
+            <div class="social-links position-absolute top-50 start-50 translate-middle d-flex">
+              ${doctor.social.facebook ? `<a href="${doctor.social.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a>` : ''}
+              ${doctor.social.twitter ? `<a href="${doctor.social.twitter}" target="_blank"><i class="fab fa-twitter"></i></a>` : ''}
+              ${doctor.social.instagram ? `<a href="${doctor.social.instagram}" target="_blank"><i class="fab fa-instagram"></i></a>` : ''}
+              ${doctor.social.linkedin ? `<a href="${doctor.social.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+              ${doctor.social.github ? `<a href="${doctor.social.github}" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+            </div>
+          </div>
+          <div class="doctor-info">
+            <h5 class="doctor-name">${doctor.name}</h5>
+            <p class="doctor-role">${doctor.role}</p>
+            <p class="doctor-description">${doctor.description}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge bg-primary">ID: ${doctor.id}</span>
+              <button class="btn btn-outline-primary btn-sm view-profile-btn" data-doctor-id="${doctor.id}">View Profile</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Function to create doctor profile content
+    function createDoctorProfile(doctor) {
+      const profile = doctor.profile;
+      return `
+        <div class="profile-header"></div>
+        <img src="${doctor.img}" alt="${doctor.name}" class="profile-avatar">
+        <div class="profile-info">
+          <h2 class="profile-name">${doctor.name}</h2>
+          <p class="profile-role">${doctor.role}</p>
+          <p class="profile-description">${doctor.description}</p>
+          <div class="social-links-profile">
+            ${doctor.social.facebook ? `<a href="${doctor.social.facebook}" target="_blank"><i class="fab fa-facebook-f"></i></a>` : ''}
+            ${doctor.social.twitter ? `<a href="${doctor.social.twitter}" target="_blank"><i class="fab fa-twitter"></i></a>` : ''}
+            ${doctor.social.instagram ? `<a href="${doctor.social.instagram}" target="_blank"><i class="fab fa-instagram"></i></a>` : ''}
+            ${doctor.social.linkedin ? `<a href="${doctor.social.linkedin}" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+            ${doctor.social.github ? `<a href="${doctor.social.github}" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+          </div>
+        </div>
+        <div class="profile-details">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-graduation-cap"></i> Education</h6>
+                <p class="detail-content">${profile.education}</p>
+              </div>
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-award"></i> Awards & Recognition</h6>
+                <p class="detail-content">${profile.awards}</p>
+              </div>
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-language"></i> Languages</h6>
+                <p class="detail-content">${profile.languages}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-clock"></i> Experience</h6>
+                <p class="detail-content">${profile.experience}</p>
+              </div>
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-stethoscope"></i> Specializations</h6>
+                <p class="detail-content">${profile.specializations}</p>
+              </div>
+              <div class="detail-section">
+                <h6 class="detail-title"><i class="fas fa-book"></i> Publications</h6>
+                <p class="detail-content">${profile.publications}</p>
+              </div>
+            </div>
+          </div>
+          <div class="detail-section">
+            <h6 class="detail-title"><i class="fas fa-heart"></i> Medical Philosophy</h6>
+            <p class="detail-content">${profile.philosophy}</p>
+          </div>
+          <div class="detail-section">
+            <h6 class="detail-title"><i class="fas fa-lightbulb"></i> Research Interests</h6>
+            <p class="detail-content">${profile.interests}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    // Function to show doctor profile modal
+    function showDoctorProfile(doctorId) {
+      const doctor = doctors.find(d => d.id === parseInt(doctorId));
+      if (doctor && doctor.profile) {
+        const modal = new bootstrap.Modal(document.getElementById('doctorProfileModal'));
+        document.getElementById('doctorProfileContent').innerHTML = createDoctorProfile(doctor);
+        modal.show();
+      }
+    }
+
+    // Function to display doctors
+    function displayDoctors(filter = 'all') {
+      const container = document.getElementById('doctors-container');
+      container.innerHTML = '';
+
+      const filteredDoctors = filter === 'all' ? doctors : doctors.filter(doctor => doctor.role === filter);
+
+      filteredDoctors.forEach(doctor => {
+        container.innerHTML += createDoctorCard(doctor);
+      });
+    }
+
+    // Filter functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      displayDoctors();
+
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          const filter = this.getAttribute('data-filter');
+          displayDoctors(filter);
+        });
+      });
+
+      // Profile button functionality
+      document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('view-profile-btn')) {
+          const doctorId = e.target.getAttribute('data-doctor-id');
+          showDoctorProfile(doctorId);
+        }
+      });
+    });
+  </script>
+</body>
+
 </html>
