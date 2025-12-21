@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patients - Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="flex-column">
+<header>
+  <a href="index.html" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="doctors.html">Doctor</a></li>
+      <li><a href="patients.html">Patients</a></li> <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+    <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
+    <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+  </div>
+
+  <div class="fas fa-bars"></div>
+</header>
+<div class="container text-center " style="padding-top: 120px">
+  <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+    Add New Patient
+  </button>
+</div>
+
+<div class="modal fade" id="addPatientModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-2">Add New Patient</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="add-patient-form">
+          <div class="mb-3">
+            <input type="text" id="p-name" class="form-control fs-4" placeholder="Patient Name" required>
+          </div>
+          <div class="mb-3">
+            <input type="text" id="p-case" class="form-control fs-4" placeholder="Case / Disease" required>
+          </div>
+          <div class="mb-3">
+            <input type="text" id="p-room" class="form-control fs-4" placeholder="Room Number" required>
+          </div>
+          <div class="mb-3">
+            <select id="p-status" class="form-select fs-4">
+              <option value="Stable">Stable</option>
+              <option value="Critical">Critical</option>
+              <option value="Recovering">Recovering</option>
+            </select>
+          </div>
+          <button type="submit" class="button w-100">Save Patient</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="container" style="padding-top: 120px">
+      <h1 class="heading">Patients List</h1>
+      <h3 class="title mb-5">Manage Current Patients</h3>
+
+      <div id="patients-container" class="row g-4 justify-content-center">
+        </div>
+    </section>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/patients.js"></script> <script src="js/script.js"></script>
+  </body>
+</html>
