@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patient Dashboard - Doctors Cares Hospital</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s;
+        }
+
+        .sidebar .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .main-content {
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 px-0 sidebar">
+                <div class="p-4">
+                    <h4 class="mb-4"><i class="fas fa-user-md me-2"></i>Patient</h4>
+                    <nav class="nav flex-column">
+                        <a class="nav-link active mb-2" href="#dashboard"><i
+                                class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
+                        <a class="nav-link mb-2" href="#profile"><i class="fas fa-user me-2"></i>Profile</a>
+                        <a class="nav-link mb-2" href="#medical-history"><i class="fas fa-history me-2"></i>Medical
+                            History</a>
+                        <a class="nav-link mb-2" href="#appointments"><i
+                                class="fas fa-calendar-check me-2"></i>Appointments</a>
+                        <a class="nav-link mb-2" href="#payments"><i class="fas fa-credit-card me-2"></i>Payments</a>
+                        <hr class="my-3">
+                        <a class="nav-link" href="index.html"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 px-0 main-content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+                    <span class="navbar-brand mb-0 h1">Welcome, Ahmed Hassan</span>
+                    <div class="ms-auto">
+                        <span class="badge bg-success">Active</span>
+                    </div>
+                </nav>
+
+                <div class="container-fluid p-4">
+                    <!-- Dashboard Overview -->
+                    <div id="dashboard" class="row mb-4">
+                        <div class="col-12">
+                            <h2 class="mb-4">Dashboard Overview</h2>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-calendar-check fa-3x text-primary mb-3"></i>
+                                    <h5>Next Appointment</h5>
+                                    <p class="mb-0">Dec 25, 2025 - 10:00 AM</p>
+                                    <small class="text-muted">Dr. John Doe - Cardiology</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-file-medical fa-3x text-success mb-3"></i>
+                                    <h5>Medical Records</h5>
+                                    <p class="mb-0">5 Records</p>
+                                    <small class="text-muted">Last updated: Dec 20, 2025</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-receipt fa-3x text-warning mb-3"></i>
+                                    <h5>Pending Payments</h5>
+                                    <p class="mb-0">$150.00</p>
+                                    <small class="text-muted">Due: Dec 30, 2025</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div id="profile" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">My Profile</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 text-center">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                                class="rounded-circle mb-3" width="150" height="150" alt="Profile">
+                                            <button class="btn btn-outline-primary btn-sm">Change Photo</button>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h4>Ahmed Hassan</h4>
+                                            <p class="text-muted">Patient ID: P001</p>
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-3">
+                                                    <label class="form-label fw-bold">Email</label>
+                                                    <p>ahmed.hassan@email.com</p>
+                                                </div>
+                                                <div class="col-sm-6 mb-3">
+                                                    <label class="form-label fw-bold">Phone</label>
+                                                    <p>+1 (555) 123-4567</p>
+                                                </div>
+                                                <div class="col-sm-6 mb-3">
+                                                    <label class="form-label fw-bold">Date of Birth</label>
+                                                    <p>January 15, 1985</p>
+                                                </div>
+                                                <div class="col-sm-6 mb-3">
+                                                    <label class="form-label fw-bold">Blood Type</label>
+                                                    <p>O+</p>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-primary">Edit Profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medical History -->
+                    <div id="medical-history" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Medical History</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Doctor</th>
+                                                    <th>Diagnosis</th>
+                                                    <th>Treatment</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dec 15, 2025</td>
+                                                    <td>Dr. John Doe</td>
+                                                    <td>Hypertension</td>
+                                                    <td>Medication prescribed</td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">View
+                                                            Details</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nov 20, 2025</td>
+                                                    <td>Dr. Jane Smith</td>
+                                                    <td>Annual Checkup</td>
+                                                    <td>Routine examination</td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">View
+                                                            Details</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointments -->
+                    <div id="appointments" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">My Appointments</h2>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span></span>
+                                <button class="btn btn-primary" onclick="window.location.href='appointment.html'">Book
+                                    New Appointment</button>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date & Time</th>
+                                                    <th>Doctor</th>
+                                                    <th>Department</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Dec 25, 2025 - 10:00 AM</td>
+                                                    <td>Dr. John Doe</td>
+                                                    <td>Cardiology</td>
+                                                    <td><span class="badge bg-success">Confirmed</span></td>
+                                                    <td>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-warning me-1">Reschedule</button>
+                                                        <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jan 5, 2026 - 2:00 PM</td>
+                                                    <td>Dr. Emily Davis</td>
+                                                    <td>Ophthalmology</td>
+                                                    <td><span class="badge bg-warning">Pending</span></td>
+                                                    <td>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-warning me-1">Reschedule</button>
+                                                        <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payments -->
+                    <div id="payments" class="row mb-4" style="display: none;">
+                        <div class="col-12">
+                            <h2 class="mb-4">Payment History</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Invoice #</th>
+                                                    <th>Date</th>
+                                                    <th>Description</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>INV-2025-001</td>
+                                                    <td>Dec 15, 2025</td>
+                                                    <td>Cardiology Consultation</td>
+                                                    <td>$150.00</td>
+                                                    <td><span class="badge bg-warning">Pending</span></td>
+                                                    <td><button class="btn btn-sm btn-outline-primary">Pay Now</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>INV-2025-002</td>
+                                                    <td>Nov 20, 2025</td>
+                                                    <td>Annual Checkup</td>
+                                                    <td>$100.00</td>
+                                                    <td><span class="badge bg-success">Paid</span></td>
+                                                    <td><button
+                                                            class="btn btn-sm btn-outline-secondary">Download</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+
+                // Hide all sections
+                document.querySelectorAll('.main-content > .container-fluid > .row').forEach(row => {
+                    row.style.display = 'none';
+                });
+
+                // Show target section
+                document.getElementById(target).style.display = 'block';
+
+                // Update active link
+                document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

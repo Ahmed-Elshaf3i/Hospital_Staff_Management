@@ -2,6 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ensure data is loaded
   if (typeof doctors === "undefined") return;
 
+  // Mobile menu toggle
+  const menuBtn = document.getElementById("menu-btn");
+  const navbar = document.querySelector("header .navbar");
+  if (menuBtn && navbar) {
+    menuBtn.onclick = () => {
+      navbar.classList.toggle("nav-toggle");
+    };
+  }
+
   // --- Doctors Page Logic ---
   const doctorsContainer = document.getElementById("doctors-container");
 

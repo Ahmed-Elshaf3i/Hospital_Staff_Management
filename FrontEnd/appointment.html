@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking - Doctors Cares Hospital</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="doctors.html">Doctor</a></li>
+                <li><a href="appointment.html">Appointment</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Login / Signup -->
+        <div class="auth-buttons">
+            <a href="admin-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Admin</a>
+            <a href="doctor-dashboard.html" class="btn-auth fw-bold fs-4 me-2">Doctor</a>
+            <a href="login.html" class="btn-auth fw-bold fs-4">Login</a>
+            <a href="signup.html" class="btn-auth fw-bold fs-4">Sign Up</a>
+        </div>
+
+        <div class="fas fa-bars" id="menu-btn"></div>
+    </header>
+
+    <section class="container py-5">
+        <h1 class="heading text-center">Book an Appointment</h1>
+        <h3 class="title text-center mb-5">Schedule Your Visit</h3>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg border-0 rounded-3">
+                    <div class="card-body p-5">
+                        <form id="appointmentForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label fw-bold">First Name</label>
+                                    <input type="text" class="form-control form-control-lg" id="firstName" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label fw-bold">Last Name</label>
+                                    <input type="text" class="form-control form-control-lg" id="lastName" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label fw-bold">Email</label>
+                                    <input type="email" class="form-control form-control-lg" id="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label fw-bold">Phone</label>
+                                    <input type="tel" class="form-control form-control-lg" id="phone" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="department" class="form-label fw-bold">Department</label>
+                                <select class="form-select form-select-lg" id="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="cardiology">Cardiology</option>
+                                    <option value="pediatrics">Pediatrics</option>
+                                    <option value="neurology">Neurology</option>
+                                    <option value="ophthalmology">Ophthalmology</option>
+                                    <option value="dentistry">Dentistry</option>
+                                    <option value="psychiatry">Psychiatry</option>
+                                    <option value="orthopedics">Orthopedics</option>
+                                    <option value="dermatology">Dermatology</option>
+                                    <option value="ent">ENT</option>
+                                    <option value="gynecology">Gynecology</option>
+                                    <option value="urology">Urology</option>
+                                    <option value="gastroenterology">Gastroenterology</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="doctor" class="form-label fw-bold">Preferred Doctor</label>
+                                <select class="form-select form-select-lg" id="doctor" required>
+                                    <option value="">Select Doctor</option>
+                                    <!-- Doctors will be populated by JavaScript -->
+                                </select>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="appointmentDate" class="form-label fw-bold">Preferred Date</label>
+                                    <input type="date" class="form-control form-control-lg" id="appointmentDate"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="appointmentTime" class="form-label fw-bold">Preferred Time</label>
+                                    <select class="form-select form-select-lg" id="appointmentTime" required>
+                                        <option value="">Select Time</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="message" class="form-label fw-bold">Additional Message</label>
+                                <textarea class="form-control form-control-lg" id="message" rows="3"
+                                    placeholder="Describe your symptoms or reason for visit..."></textarea>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg fw-bold">Book Appointment</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Doctors Cares Hospital</h5>
+                    <p>Providing exceptional healthcare services with compassion and expertise since 2020.</p>
+                    <div class="d-flex">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li><a href="services.html" class="text-light text-decoration-none">Services</a></li>
+                        <li><a href="doctors.html" class="text-light text-decoration-none">Doctors</a></li>
+                        <li><a href="appointment.html" class="text-light text-decoration-none">Appointment</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="fw-bold">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Health Street, Medical City, MC 12345</p>
+                    <p><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@doctorscareshospital.com</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Doctors Cares Hospital. All rights reserved. Created by <span
+                        class="fw-bold">Developer</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="doctors.js"></script>
+    <script>
+        // Populate doctors based on selected department
+        document.getElementById('department').addEventListener('change', function () {
+            const department = this.value;
+            const doctorSelect = document.getElementById('doctor');
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+
+            doctors.forEach(doctor => {
+                if (doctor.role.toLowerCase().includes(department) || department === '') {
+                    const option = document.createElement('option');
+                    option.value = doctor.id;
+                    option.textContent = doctor.name + ' - ' + doctor.role;
+                    doctorSelect.appendChild(option);
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('appointmentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Appointment booked successfully! We will contact you soon.');
+            this.reset();
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
